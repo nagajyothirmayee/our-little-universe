@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little Universes 💗</title>
+
+<style>
+  @keyframes sparkle {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 3px pink);
+    }
+    100% {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 18px deeppink);
+    }
+}
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:"Trebuchet MS",Arial,sans-serif;
+    background:linear-gradient(135deg,#ffe0ed,#f0ddff,#fff0f5);
+    color:#713b60;
+    text-align:center;
+    min-height:100vh;
+}
+.screen{
+    display:none;
+    min-height:100vh;
+    padding:22px 14px;
+    align-items:center;
+    justify-content:center;
+}
+.screen.active{display:flex}
+.card{
+    width:100%;
+    max-width:650px;
+    padding:26px 18px;
+    border-radius:25px;
+    background:rgba(255,255,255,.92);
+    box-shadow:0 8px 30px rgba(175,80,130,.16);
+}
+h1{color:#d34f91;font-size:29px}
+h2{color:#c64f91}
+p{font-size:17px;line-height:1.8;white-space:pre-line}
+button{
+    border:0;
+    padding:13px 24px;
+    margin:9px;
+    border-radius:30px;
+    background:#e879ad;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{background:#cf5794}
+.secondary{background:#b78adf}
+input{
+    padding:13px;
+    width:85%;
+    max-width:350px;
+    border:2px solid #efacd0;
+    border-radius:20px;
+    font-size:16px;
+    text-align:center;
+}
+.big{font-size:65px;margin:12px}
+.photo{
+    display:block;
+    width:100%;
+    max-width:440px;
+    max-height:500px;
+    object-fit:contain;
+    margin:18px auto;
+    border-radius:18px;
+    background:#fff0f7;
+}
+#countdown{font-size:75px;color:#d34f91;font-weight:bold}
+#panda{font-size:90px;animation:bonk .5s infinite alternate}
+@keyframes bonk{
+    from{transform:rotate(-10deg)}
+    to{transform:rotate(10deg)}
+}
+@media(max-width:450px){
+    h1{font-size:25px}
+    .card{padding:22px 13px}
+}
+#endingScreen button {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative;
+    z-index: 999;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+}
+#endingScreen button {
+    display: block;
+    margin: 20px auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- MUSIC FILES -->
+<audio id="song1" src="song1.mp3" loop preload="auto"></audio>
+<audio id="song2" src="song2.mp3" loop preload="auto"></audio>
+<audio id="song3" src="song3.mp3" loop preload="auto"></audio>
+
+<!-- 1. WELCOME -->
+<section id="welcome" class="screen active">
+    <div class="card">
+        <div class="big">💌🎀</div>
+        <h1>Welcome to ur little universe</h1>
+        <p>A tiny place made with memories, love and little moments. 💗</p>
+        <button onclick="goToQuestion()">Continue →</button>
+    </div>
+</section>
+
+<!-- 2. YES / NO -->
+<section id="question" class="screen">
+    <div class="card">
+        <div class="big">🥹💗</div>
+        <h1>Do you want to open it?</h1>
+        <p>There's a little surprise waiting for you. 🎀</p>
+        <button onclick="yesClicked()">YES 💗</button>
+        <button class="secondary" onclick="showScreen('pandaScreen')">NO 🙈</button>
+    </div>
+</section>
+
+<!-- 3. PANDA PUNCH -->
+<section id="pandaScreen" class="screen">
+    <div class="card">
+        <h1>PANDA PUNCH! 💥</h1>
+        <div id="panda">🐼👊</div>
+        <p>Heheee! You can't escape this surprise! 😂💗</p>
+        <button onclick="showScreen('question')">Go back ↩️</button>
+    </div>
+</section>
+
+<!-- 4. COUNTDOWN -->
+<section id="countdownScreen" class="screen">
+    <div class="card">
+        <h1>Our little universe is opening...</h1>
+        <div id="countdown">5</div>
+        <p>Get ready for our memories. 🥹💗</p>
+    </div>
+</section>
+
+<!-- 5. TYPE NAME -->
+<section id="nameScreen" class="screen">
+    <div class="card">
+        <div class="big">🎀💗</div>
+        <h1>Type ur name</h1>
+        <p>Before we enter our little universe...</p>
+        <input id="friendName" type="text" placeholder="Type ur name here">
+        <br><br>
+        <button onclick="beginMemories()">Let's go! 💗</button>
+    </div>
+</section>
+
+<!-- 6. FIRST PICTURE -->
+<section id="firstPicture" class="screen">
+    <div class="card">
+        <h1>Our First Picture 📸❤️</h1>
+        <p>One picture, so many memories. 🥹💗</p>
+      <img src="myfirst.jpg" alt="Our first picture" style="width:250px; max-width:80%; height:auto; display:block; margin:15px auto; border-radius:15px;">
+        <p>Every little beginning became a memory worth keeping. 💗</p>
+        <button onclick="showScreen('dateClose')">Next →</button>
+    </div>
+</section>
+
+<!-- 7. BECAME CLOSE -->
+<section id="dateClose" class="screen">
+    <div class="card">
+        <div class="big">🫂💗</div>
+        <h1>We Became Very Close</h1>
+        <h2>04/03/2026 &amp; 05/03/2026</h2>
+        <p>Somewhere around these days, our bond became even more special. 🎀</p>
+        <button onclick="showScreen('dateForever')">Next →</button>
+    </div>
+</section>
+
+<!-- 8. CONSTANT AND FOREVER -->
+<section id="dateForever" class="screen">
+    <div class="card">
+        <div class="big">♾️💗</div>
+        <h1>Your Constant &amp; Forever One</h1>
+        <h2>06/03/2026</h2>
+        <p>The day you called me your “constant and forever one.” 🥹🫶🏻</p>
+        <button onclick="showScreen('dateReel')">Next →</button>
+    </div>
+</section>
+
+<!-- 9. FIRST REEL -->
+<section id="dateReel" class="screen">
+    <div class="card">
+        <div class="big">📱🎀</div>
+        <h1>The First Reel You Sent Me</h1>
+        <h2>15/04/2026</h2>
+        <p>One little reel that became part of our story. 💗</p>
+        <button onclick="showScreen('dateCryHer')">Next →</button>
+    </div>
+</section>
+
+<!-- 10. FIRST CRY FOR HER -->
+<section id="dateCryHer" class="screen">
+    <div class="card">
+        <div class="big">🥹❤️</div>
+        <h1>My First Cry for You</h1>
+        <h2>13/02/2026</h2>
+        <p>The first time I cried for you, because our bond means more to me than I can explain. 🫂💗</p>
+        <button onclick="showScreen('dateCryTogether')">Next →</button>
+    </div>
+</section>
+
+<!-- 11. FIRST CRY TOGETHER -->
+<section id="dateCryTogether" class="screen">
+    <div class="card">
+        <div class="big">🫂🥹</div>
+        <h1>Our First Cry Together</h1>
+        <h2>18/09/2026</h2>
+        <p>A moment we shared, and another date that will always stay in our little story. 💗</p>
+        <button onclick="openBirthdayMessage()">Next → 💌</button>
+    </div>
+</section>
+
+<!-- 12. BIRTHDAY MATTER -->
+<section id="message" class="screen">
+    <div class="card">
+        <div class="big">💌🎂</div>
+        <h1>Happy Birthday, My Favourite Girl! 🎀</h1>
+
+        <p>It's been one and a half years since we became besties, but look at us now! 😂❤️ We fight like two little kids over the smallest things, argue over silly reasons, and literally share everything—even chocolate! 🍫😭 Sometimes I wonder how we can fight one minute and start laughing together the very next minute. 😂🫂
+
+In these one and half year of B.Tech, you've become someone who makes my days a little more fun and a lot more memorable.🤗🤌
+
+Before you, I never thought I would put so much time and effort into making videos for someone. But for you, I'm doing things I've never really done before. You're the first person for whom I'm trying this hard to create something special, and honestly, I never knew that making something for another person could make ME this happy.
+
+Every time I sit down to make a video for you, I start with one little thought: "I hope she likes this." Then I go through pictures, choose our moments, think about which song would suit us, and try to put everything together in a way that feels special. Sometimes, while making the video, I end up smiling at our pictures, remembering our silly conversations, our daily fights, and all those little moments that might seem ordinary to everyone else but mean something to me.
+
+There are so many things I want to tell you, but sometimes I don't even know where to start. 🥹💗 If you ever ask me how much you mean to me, I honestly don't think I could ever give you an answer that is enough. Because the truth is, I love you so much more than you think, more than I show, and more than these little words could ever explain 🫶🏻.
+
+Don't ever think of leaving me, okayyy? 🥹💗 I want you by my side for so many more memories, silly fights, and endless laughs. 🫂🎀
+
+Even though I fight with you all the time, I literally can't imagine without you. 🥹❤️.I'm a little possessive because I always have this fear that someone might become closer to you than me.I love spending time with you, and honestly, seeing you share a closer bond with someone else than you do with me hurts me more.
+
+And do you know why I cry whenever we fight? It's because you mean so much to me. I may get angry with you, but I can never stay okay when things aren't okay between us. 🫂💗
+
+My fights may show my anger, but my tears show how deeply I care about you. No matter how many times we fight, a part of me will always want us to be okay again. 🥹🫶🏻
+
+I know I fight with you a lot, but please remember that behind all those fights is someone who loves you so much and never wants to lose the bond we share. ♾️💗
+
+Happy Birthdayyy, my favourite girllll! 🎂😭💗 I LOVE YOU SOOOOO MUCHHH, MORE THAN YOU THINKKK! 🧿❤️‍🩹♾️</p>
+
+        <button onclick="openPhotos()">Next → Our memories 📸</button>
+    </div>
+</section>
+
+<!-- 13. ONE PHOTO AT A TIME -->
+<section id="photosScreen" class="screen">
+    <div class="card">
+        <h1>Our Little Memories 📸💗</h1>
+        <h2 id="photoNumber">Photo 1 of 13</h2>
+
+        <img id="memoryPhoto" class="photo" src="photo1.jpg" alt="Our memory">
+
+        <p id="photoCaption">A little memory of us. 🥹💗</p>
+
+        <button id="nextPhotoButton" onclick="nextPhoto()">Next →</button>
+    </div>
+</section>
+
+<!-- 14. VIDEO -->
+<section id="videoScreen" class="screen">
+    <div class="card">
+        <h1>Our Videos 🎬💗</h1>
+        <p>Little moments we can watch again and again. 🫶🏻</p>
+
+        <video id="memoryVideo" controls playsinline
+               style="width:100%;max-width:500px;border-radius:18px;">
+            <source src="video1.mp4" type="video/mp4">
+            Your browser does not support this video.
+        </video>
+
+        <br>
+        <button onclick="showScreen('endingScreen')">Next → One last thing 💌</button>
+    </div>
+</section>
+
+<!-- 15. ENDING -->
+<section id="endingScreen" class="screen">
+    <div class="card">
+        <div class="big">🎁💗</div>
+        <h1>One Last Thing...</h1>
+      <div id="loveHeart" ondblclick="showLove()" style="font-size:75px; cursor:pointer;">
+    ❤️
+</div>
+
+<p id="tapText">Double tap to reveal the heart</p>
+
+<h2 id="loveMessage" style="display:none;">
+    I LOVE YOU SO MUCHHH! ❤️🫶🏻♾️
+    <button onclick="restartWebsite()">Start Again ↻</button>
+</h2>
+    </div>
+</section>
+
+<script>
+let countdownTimer;
+
+const photos = [
+    "photo1.jpg",
+    "photo2.jpg",
+    "photo3.jpg",
+    "photo4.jpg",
+    "photo5.jpg",
+    "photo6.jpg",
+    "photo7.jpg",
+    "photo8.jpg",
+    "photo9.jpg",
+    "photo10.jpg",
+    "photo11.jpg",
+    "photo12.jpg",
+    "photo13.jpg"
+];
+
+let currentPhoto = 0;
+
+function showScreen(id) {
+    document.querySelectorAll(".screen").forEach(function(screen) {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    const video = document.getElementById("memoryVideo");
+    if (id !== "videoScreen") {
+        video.pause();
+    }
+}
+
+function playSong(id) {
+    ["song1", "song2", "song3"].forEach(function(songId) {
+        const song = document.getElementById(songId);
+
+        if (songId !== id) {
+            song.pause();
+            song.currentTime = 0;
+        }
+    });
+
+    const chosenSong = document.getElementById(id);
+
+    chosenSong.play().catch(function() {
+        console.log("Browser needs a user tap to allow music.");
+    });
+}
+
+/* Continue opens the YES/NO screen and tries to start Song 1. */
+function goToQuestion() {
+    showScreen("question");
+    playSong("song1");
+}
+
+/* YES starts the countdown. Song 1 continues during the countdown and dates. */
+function yesClicked() {
+    showScreen("countdownScreen");
+
+    let number = 5;
+    document.getElementById("countdown").textContent = number;
+
+    clearInterval(countdownTimer);
+
+    countdownTimer = setInterval(function() {
+        number--;
+
+        if (number > 0) {
+            document.getElementById("countdown").textContent = number;
+        } else {
+            clearInterval(countdownTimer);
+            showScreen("nameScreen");
+        }
+    }, 1000);
+}
+
+/* Name entered, then the first picture appears. */
+function beginMemories() {
+    const name = document.getElementById("friendName").value.trim();
+
+    if (name === "") {
+        alert("First type ur name ra 💗");
+        return;
+    }
+
+    showScreen("firstPicture");
+}
+
+/* Birthday matter starts Song 2. */
+function openBirthdayMessage() {
+    showScreen("message");
+    playSong("song2");
+}
+
+/* Photos begin Song 3 and appear one by one. */
+function openPhotos() {
+    currentPhoto = 0;
+    showScreen("photosScreen");
+    playSong("song3");
+    displayPhoto();
+}
+
+function displayPhoto() {
+    const image = document.getElementById("memoryPhoto");
+
+    image.onerror = function() {
+        this.alt = "Photo not found: " + photos[currentPhoto];
+    };
+
+    image.src = photos[currentPhoto];
+
+    document.getElementById("photoNumber").textContent =
+        "Photo " + (currentPhoto + 1) + " of " + photos.length;
+
+    document.getElementById("nextPhotoButton").textContent =
+        currentPhoto === photos.length - 1
+        ? "Next → Our Video 🎬"
+        : "Next →";
+}
+
+function nextPhoto() {
+    if (currentPhoto < photos.length - 1) {
+        currentPhoto++;
+        displayPhoto();
+    } else {
+        showScreen("videoScreen");
+    }
+}
+
+/* Keep Song 3 playing through the video and ending. */
+document.getElementById("memoryVideo").addEventListener("play", function() {
+    const song = document.getElementById("song3");
+
+    if (song.paused) {
+        song.play().catch(function() {});
+    }
+});
+
+function restartWebsite() {
+    clearInterval(countdownTimer);
+    document.getElementById("friendName").value = "";
+    document.getElementById("memoryVideo").pause();
+    showScreen("welcome");
+    stopSongs();
+}
+
+function stopSongs() {
+    ["song1", "song2", "song3"].forEach(function(id) {
+        const song = document.getElementById(id);
+        song.pause();
+        song.currentTime = 0;
+    });
+}
+</script>
+<!-- Final Heart Surprise -->
+<!-- 15. ENDING -->
+<section id="endingScreen" class="screen">
+    <div class="card">
+        <div class="big">🎁💗</div>
+
+        <h1>One Last Thing...</h1>
+
+        <div id="loveHeart"
+     ondblclick="showLove()"
+     style="font-size:65px; cursor:pointer; user-select:none;">
+    ❤️
+</div>
+
+<h2 id="loveMessage" style="display:none; color:#ff1493;">
+    I LOVE YOU SO MUCHHH! ❤️🫶🏻♾️
+</h2>
+
+        <p>Out of all the little moments in this universe, I'm so glad we got to create some together. 🥹🫂
+
+Happy Birthday once again, my favourite girl! 🎂💗
+
+More silly fights, more laughter, more memories, and more of our little universe. ♾️🎀</p>
+
+        <h2>Forever our little universe. 💗♾️</h2>
+
+        <button onclick="restartWebsite()">Start Again ↻</button>
+    </div>
+</section>
+
+<script>
+function showLove() {
+     document.getElementById("tapText").innerHTML = "You revealed my heart!";
+    document.getElementById("loveMessage").style.display = "block";
+    
+     document.getElementById("loveHeart").innerHTML = "💖✨";
+}
+</script>
+    </h1>
+</div>
+
+<script>
+function showLove() {
+    document.getElementById("loveMessage").style.display = "block";
+    document.getElementById("loveHeart").innerHTML = "💖";
+}
+</script>
+</body>
+</html>
